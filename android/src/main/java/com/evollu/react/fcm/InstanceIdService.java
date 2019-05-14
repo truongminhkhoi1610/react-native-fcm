@@ -11,22 +11,15 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ReactContext;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
-public class InstanceIdService extends FirebaseInstanceIdService {
+public class InstanceIdService extends FirebaseMessagingService {
 
     private static final String TAG = "InstanceIdService";
 
-    /**
-     * Called if InstanceID token is updated. This may occur if the security of
-     * the previous token had been compromised. This call is initiated by the
-     * InstanceID provider.
-     */
-    // [START refresh_token]
     @Override
-    public void onTokenRefresh() {
-        // Get updated InstanceID token.
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+    public void onNewToken(String s) {
+        String refreshedToken = s;
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
         // Broadcast refreshed token
@@ -61,4 +54,12 @@ public class InstanceIdService extends FirebaseInstanceIdService {
             }
         });
     }
+
+    /**
+     * Called if InstanceID token is updated. This may occur if the security of
+     * the previous token had been compromised. This call is initiated by the
+     * InstanceID provider.
+     */
+    // [START refresh_token]
+
 }
